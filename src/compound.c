@@ -14,6 +14,7 @@
 
 #include <stdint.h>
 #include <string.h>
+#include <stddef.h>
 
 typedef struct b3SharedHull
 {
@@ -228,7 +229,9 @@ static bool b3CompareMeshes( const b3MeshData* mesh1, const b3MeshData* mesh2 )
 
 static inline uint64_t b3HashMaterial( const b3SurfaceMaterial* material )
 {
-	return vt_wyhash( material, sizeof( b3SurfaceMaterial ) );
+	// Exclude trailing padding bytes that may be uninitialized in stack-allocated structs.
+	size_t meaningfulBytes = offsetof( b3SurfaceMaterial, customColor ) + sizeof( material->customColor );
+	return vt_wyhash( material, meaningfulBytes );
 }
 
 static bool b3CompareMaterials( const b3SurfaceMaterial* mat1, const b3SurfaceMaterial* mat2 )
@@ -238,7 +241,8 @@ static bool b3CompareMaterials( const b3SurfaceMaterial* mat1, const b3SurfaceMa
 		return true;
 	}
 
-	int result = memcmp( mat1, mat2, sizeof( b3SurfaceMaterial ) );
+	size_t meaningfulBytes = offsetof( b3SurfaceMaterial, customColor ) + sizeof( mat1->customColor );
+	int result = memcmp( mat1, mat2, meaningfulBytes );
 	return result == 0;
 }
 

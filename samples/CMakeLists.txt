@@ -165,6 +165,7 @@ set(SAMPLE_FILES
     sample_issues.cpp
     sample_joint.cpp
     sample_manifold.cpp
+    sample_molecules.cpp
     sample_mesh.cpp
     sample_ragdoll.cpp
     sample_replay.cpp
