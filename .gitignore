@@ -12,3 +12,12 @@ CMakeUserPresets.json
 .tmp/
 .fetchcontent-cache/
 *.b3rec
+
+# Python temporary files
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+*.npz

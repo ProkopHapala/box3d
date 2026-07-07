@@ -168,6 +168,7 @@ set(SAMPLE_FILES
     sample_molecules.cpp
     sample_mesh.cpp
     sample_ragdoll.cpp
+    sample_rigid_atoms.cpp
     sample_replay.cpp
     sample_robustness.cpp
     sample_shapes.cpp
@@ -189,7 +190,8 @@ endif()
 # (sample_issues pulls dumps/.../box3d_dump.inl at compile time).
 target_include_directories(samples PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CMAKE_CURRENT_SOURCE_DIR}/../data")
+    "${CMAKE_CURRENT_SOURCE_DIR}/../data"
+    "${CMAKE_CURRENT_SOURCE_DIR}/../src")
 
 # gfx: the renderer + Draw*/adapter. shared: human, utils (Random*), the
 # benchmark/determinism helpers the samples lean on.
