@@ -42,6 +42,7 @@ extern int LargeWorldTest( void );
 extern int MathTest( void );
 extern int MoverTest( void );
 extern int RigidAtomFFTest( void );
+extern int RigidAtomFF_Benchmark( void );
 extern int RecordingTest( void );
 extern int ShapeTest( void );
 extern int TableTest( void );
@@ -113,6 +114,7 @@ int main( int argc, char** argv )
 	MAYBE_RUN_TEST( MathTest );
 	MAYBE_RUN_TEST( MoverTest );
 	MAYBE_RUN_TEST( RigidAtomFFTest );
+	MAYBE_RUN_TEST( RigidAtomFF_Benchmark );
 	MAYBE_RUN_TEST( RecordingTest );
 	MAYBE_RUN_TEST( ShapeTest );
 	MAYBE_RUN_TEST( TableTest );

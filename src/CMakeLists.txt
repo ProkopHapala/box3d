@@ -60,6 +60,8 @@ set(BOX3D_SOURCE_FILES
 	recording_ops.inl
 	recording_replay.c
 	recording_replay.h
+	pairwise_potentials.c
+	pairwise_potentials.h
 	rigid_atom_ff.c
 	rigid_atom_ff.h
 	world_snapshot.c

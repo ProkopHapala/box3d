@@ -12,6 +12,14 @@ extern "C" {
 
 #define RAFF_MAX_PORTS 4
 
+typedef enum {
+	RAFF_SOLVER_SI,     ///< Sequential Impulses — local implicit harmonic (current)
+	RAFF_SOLVER_XPBD,   ///< XPBD — warm-started Lagrange multipliers, position-level
+	RAFF_SOLVER_PD,     ///< Projective Dynamics — local projection + global Jacobi
+	RAFF_SOLVER_VBD,    ///< Vertex Block Descent — 6x6 block solve per atom
+	RAFF_SOLVER_AVBD,   ///< Augmented VBD — VBD + augmented Lagrangian for hard constraints
+} RAffSolverMethod;
+
 typedef struct RAffAtom
 {
 	b3Vec3 pos;
@@ -68,6 +76,16 @@ typedef struct RAffWorld
 	b3Vec3* Lown;
 	b3Vec3* Jrecoil; // flat: nAtoms * RAFF_MAX_PORTS
 	b3Vec3* Jcoll;
+
+	// XPBD/AVBD: per-port Lagrange multipliers (warm-started across microsteps)
+	float* lambdaPort; // flat: nAtoms * RAFF_MAX_PORTS
+
+	// VBD/AVBD: per-atom 6x6 Hessian and 6x1 gradient (built each microstep)
+	float* Hblock;     // flat: nAtoms * 36 (row-major 6x6)
+	float* gblock;     // flat: nAtoms * 6
+
+	// Solver method selection
+	RAffSolverMethod solverMethod;
 
 	// Parameters
 	float H;          // soft macrostep
